@@ -15,13 +15,14 @@ pipeline {
                     // If not initialized, perform initialization and cache plugins
                     if (!terraformInitialized) {
                         withTerraformCache(cacheID: 'terraform-cache') {
+                            // Move withCredentials inside withTerraformCache
                             withCredentials([[
                                 $class: 'AmazonWebServicesCredentialsBinding',
                                 accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                                 credentialsId: 'AWS_CRED',
                                 secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                             ]]) {
-                                sh 'terraform init -plugin-dir=$TF_PLUGIN_CACHE_DIR'
+                                sh "terraform init -plugin-dir=${TF_PLUGIN_CACHE_DIR}"
                             }
                         }
                         // Mark Terraform as initialized
