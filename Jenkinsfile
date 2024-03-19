@@ -34,10 +34,10 @@ pipeline {
         }
     }
 
-    post {
+   /* post {
         always {
             // Remove workspace directory after Terraform commands
             deleteDir()
         }
-    }
+    }*/
 }
