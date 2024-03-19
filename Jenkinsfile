@@ -18,7 +18,7 @@ pipeline {
                             id: 'terraform-action',
                             message: 'Do you want to apply or destroy Terraform infrastructure?',
                             parameters: [
-                                choice(choices: ['apply', 'destroy'], description: 'Select an action')
+                                choice(name: 'action', choices: ['apply', 'destroy'], description: 'Select an action')
                             ]
                         )
 
